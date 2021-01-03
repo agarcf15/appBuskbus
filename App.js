@@ -1,5 +1,5 @@
 import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
+import { StyleSheet, Text, View, Image} from 'react-native';
 import React from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
@@ -22,7 +22,30 @@ export default function App() {
     </NavigationContainer>
   );
 }
+//options={{headerTitle: props => <LogoTitle {...props} /> }
 
+
+// URL http://algeciras.timebus.es/api/buskbus/v2/index.php/{{comando}}/0008/buskbus/{{parámetros}}
+function LogoTitle() {
+  return (
+    <View>
+      <View style={{flex: 7, justifyContent: 'center'}}>
+        <Text>
+          Líneas
+        </Text>
+      </View>
+      <View style={{flex: 3, justifyContent: 'center'}}>
+        <Image
+          style={{ width: 50, height: 50 }}
+          source={require('./app/assets/images/frente-del-autobus.png')}
+        />
+      </View>
+      
+    </View>
+
+    
+  );
+}
 const styles = StyleSheet.create({
   container: {
     flex: 1,
