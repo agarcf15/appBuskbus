@@ -4,10 +4,11 @@ import { useEffect, useState } from 'react';
 
 import { Alert, StyleSheet, Image, TouchableHighlight, FlatList, ActivityIndicator } from 'react-native';
 import { Card } from 'react-native-paper';
+import Linea from './Linea'
 
 import { Text, View, } from '../../components/Themed';
 
-export default VistaLineas = () => {
+const VistaLineas = ({navigation}) => {
   const [isLoading, setLoading] = useState(true);
   const [data, setData] = useState([]);
 
@@ -36,9 +37,9 @@ export default VistaLineas = () => {
           data={data}
           keyExtractor={({ Codigo }, index) => Codigo}
           renderItem={({ item }) => (
-            <Card style={styles.mycard}>
+            <Card style={styles.mycard} onPress={()=>navigation.navigate("Linea", {item})}>
               <View style={styles.cardview, {backgroundColor: item.ColorFondo}}>
-                <Text style={{color: item.ColorTexto}}>{item.CodigoPanel}, {item.Nombre}</Text>
+                <Text style={{color: item.ColorTexto}, styles.title}>{item.CodigoPanel}, {item.Nombre}</Text>
               </View>
             </Card>
           )}
@@ -48,6 +49,7 @@ export default VistaLineas = () => {
   );
 };
 
+export default VistaLineas;
 
 const styles = StyleSheet.create({
   mycard:{

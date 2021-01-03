@@ -5,6 +5,7 @@ import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import Portada from './app/screens/Portada'
 import VistaLineas from './app/screens/VistaLineas'
+import Linea from './app/screens/Linea'
 
 const Stack = createStackNavigator();
 
@@ -15,8 +16,11 @@ export default function App() {
     <NavigationContainer>
       <Stack.Navigator>
 
-        <Stack.Screen name="Portada" component={Portada} />
-        <Stack.Screen name="Lineas" component={VistaLineas} />
+        <Stack.Screen name="Portada" component={Portada} 
+          options={opciones}/>
+        <Stack.Screen name="Lineas" component={VistaLineas} 
+          options={{...opciones, title: "Líneas"}}/>
+        <Stack.Screen name="Linea" component={Linea} />
 
       </Stack.Navigator>
     </NavigationContainer>
@@ -24,7 +28,13 @@ export default function App() {
 }
 //options={{headerTitle: props => <LogoTitle {...props} /> }
 
-
+const opciones = {
+  title: "Buskbus",
+    headerTintColor: "#c44037",
+    headerStyle:{
+      backgroundColor: "8c78ad"
+    }
+}
 // URL http://algeciras.timebus.es/api/buskbus/v2/index.php/{{comando}}/0008/buskbus/{{parámetros}}
 function LogoTitle() {
   return (
