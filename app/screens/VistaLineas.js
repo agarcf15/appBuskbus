@@ -57,7 +57,6 @@ const styles = StyleSheet.create({
     padding: 5
   },
   cardview:{
-    flexDirection: "row",
     padding: 6,
   },
   cuadrado: {

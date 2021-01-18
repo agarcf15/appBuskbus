@@ -6,6 +6,7 @@ import { createStackNavigator } from '@react-navigation/stack';
 import Portada from './app/screens/Portada'
 import VistaLineas from './app/screens/VistaLineas'
 import Linea from './app/screens/Linea'
+import Parada from './app/screens/Parada'
 
 const Stack = createStackNavigator();
 
@@ -21,6 +22,7 @@ export default function App() {
         <Stack.Screen name="Lineas" component={VistaLineas} 
           options={{...opciones, title: "Líneas"}}/>
         <Stack.Screen name="Linea" component={Linea} />
+        <Stack.Screen name="Parada" component={Parada} />
 
       </Stack.Navigator>
     </NavigationContainer>
