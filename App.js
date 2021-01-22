@@ -34,7 +34,7 @@ const opciones = {
   title: "Buskbus",
     headerTintColor: "#c44037",
     headerStyle:{
-      backgroundColor: "8c78ad"
+      backgroundColor: "white"
     }
 }
 // URL http://algeciras.timebus.es/api/buskbus/v2/index.php/{{comando}}/0008/buskbus/{{parámetros}}

@@ -2,11 +2,10 @@
 import * as React from 'react';
 import { useEffect, useState } from 'react';
 
-import { Alert, StyleSheet, Image, TouchableHighlight, FlatList, ActivityIndicator } from 'react-native';
-import { Card } from 'react-native-paper';
-import Linea from './Linea'
+import { StyleSheet, FlatList, ActivityIndicator } from 'react-native';
+import { List } from 'react-native-paper';
 
-import { Text, View, } from '../../components/Themed';
+import { View, } from '../../components/Themed';
 
 const VistaLineas = ({navigation}) => {
   const [isLoading, setLoading] = useState(true);
@@ -31,19 +30,29 @@ const VistaLineas = ({navigation}) => {
   }, []);
  
   return (
-    <View >
+    <View style={styles.cuadrado}>
       {isLoading ? <ActivityIndicator/> : (
+        <View style={{flexDirection: 'row'}}>
         <FlatList
           data={data}
           keyExtractor={({ Codigo }, index) => Codigo}
           renderItem={({ item }) => (
-            <Card style={styles.mycard} onPress={()=>navigation.navigate("Linea", {item})}>
-              <View style={styles.cardview, {backgroundColor: item.ColorFondo}}>
-                <Text style={{color: item.ColorTexto}, styles.title}>{item.CodigoPanel}, {item.Nombre}</Text>
-              </View>
-            </Card>
+            <List.Item
+              title= {'Línea ' + item.CodigoPanel}
+              description = {item.Nombre}
+              left={props => <List.Icon {...props} 
+                icon={require('../assets/images/frente-del-autobus.png')}
+              />}
+              onPress={()=>navigation.navigate("Linea", {item})}
+              style={styles.title, {backgroundColor: item.ColorFondo}}
+              titleStyle={{color: item.ColorTexto}}
+              descriptionStyle= {{color: item.ColorTexto}}
+            />
           )}
         />
+        
+          
+        </View>
       )}
     </View>
   );
@@ -54,17 +63,19 @@ export default VistaLineas;
 const styles = StyleSheet.create({
   mycard:{
     margin: 5,
-    padding: 5
+    padding: 5,
   },
   cardview:{
     padding: 6,
+    flexDirection: 'row',
+    flex: 1
   },
   cuadrado: {
-    flex: 0.5,
+    flex: 1,
     width: '100%',
     alignItems: 'center',
     justifyContent: 'center',
-    backgroundColor: "blue",
+    backgroundColor: "#86a3d1",
   },
   container: {
     flex: 1,
@@ -76,8 +87,7 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
   },
   boton:{
-    width: '80%',
-    height:'10%',
+    width: '100%',
     justifyContent: 'center',
     alignItems: 'center',
     backgroundColor: "#ccc9c0"
@@ -85,14 +95,15 @@ const styles = StyleSheet.create({
   separator: {
     marginVertical: 10,
     height: 1,
-    width: '80%',
+    width: '100%',
   },
   logo: {
-    width: '60%',
-    height: '60%',
+    height: '100%',
+    resizeMode: 'contain'
   },
   icono: {
     width: 10,
-    height: 10,
+    resizeMode: 'contain'
+
   },
 });

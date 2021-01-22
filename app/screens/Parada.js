@@ -1,27 +1,25 @@
 import * as React from 'react';
 import { useEffect, useState } from 'react';
 
-import { Alert, StyleSheet, Image, TouchableHighlight, FlatList, ActivityIndicator } from 'react-native';
-import { Card } from 'react-native-paper';
+import { StyleSheet, FlatList, ActivityIndicator } from 'react-native';
+import { List } from 'react-native-paper';
 
-import { Text, View, } from '../../components/Themed';
+import { View, } from '../../components/Themed';
 
-import { createMaterialTopTabNavigator }  from '@react-navigation/material-top-tabs'
-import { createBottomTabNavigator }  from '@react-navigation/bottom-tabs'
 
 import MapView from 'react-native-maps';
 import { Marker } from 'react-native-maps';
 
 
 
-const Linea = ({route}) => {
+const Linea = ({route, navigation}) => {
 
     const {IdParada, CodigoParada, NombreParada} = route.params.item
     const [isLoading, setLoading] = useState(true); //si esta true no enseña los datos, ya que no se han obtenido
-    
+
     const [data, setData] = useState([]);//datos de la api
 
-
+ 
 
     useEffect(() => {
         console.log(IdParada, CodigoParada, NombreParada);
@@ -44,7 +42,7 @@ const Linea = ({route}) => {
         .finally(() => setLoading(false));
     }, []);
     return (
-        <View style ={{flex: 1}}>
+        <View style={{flex: 1}}>
           {isLoading ? <ActivityIndicator/> : (
             <View style={{flexDirection: 'column'}}>
               <MapView
@@ -63,19 +61,35 @@ const Linea = ({route}) => {
                     />                      
 
               </MapView>
-              
+              <List.Item
+                title= {NombreParada}
+                left={props => <List.Icon {...props} 
+                  icon={require('../assets/images/marcador-de-posicion.png')}
+                />}
+                style={styles.title, {backgroundColor: '#86a3d1'}}
+                
+              />
+              <View style={{}}>
               <FlatList
               data={data.Correspondencias}
               keyExtractor={({ HoraPaso }, index) => HoraPaso.toString()}
               renderItem={({ item }) => (
-                <Card style={styles.mycard} onPress={()=>navigation.navigate("Linea", {item})}>
-                  <View style={styles.cardview, {backgroundColor: item.ColorFondo}}>
-                    <Text >{item.CodigoPanel}, {item.Nombre}</Text>
-                    <Text >{item.Dias}, {item.HoraPaso}</Text>
-                  </View>
-                  </Card>
+                
+                <List.Item
+                  title= {'Línea ' + item.CodigoPanel, item.Nombre}
+                  description = {item.Dias, item.HoraPaso}
+                  left={props => <List.Icon {...props} 
+                    icon={require('../assets/images/frente-del-autobus.png')}
+                  />}
+                  onPress={()=>navigation.navigate("Linea", {item})}
+                  style={styles.title, {backgroundColor: item.ColorFondo}}
+                  titleStyle={{color: item.ColorTexto}}
+                  descriptionStyle= {{color: item.ColorTexto}}
+                />
+                  
                   )}
               />
+              </View>
             </View>
           )}
         </View>

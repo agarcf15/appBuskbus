@@ -1,10 +1,8 @@
 import * as React from 'react';
-import { Alert, StyleSheet, Image, TouchableHighlight, Pressable } from 'react-native';
-import {createStackNavigator} from '@react-navigation/stack'
-import VistaLineas from '../screens/VistaLineas';
+import { Alert, StyleSheet, Image, } from 'react-native';
 
-import { Text, View, } from '../../components/Themed';
-
+import { View } from '../../components/Themed';
+import { Button } from 'react-native-paper'
 
 function Portada({navigation}) {
   return (
@@ -12,45 +10,40 @@ function Portada({navigation}) {
       <View style={styles.cuadrado}>
         <Image
         style={styles.logo}
-        source={require('../assets/images/bus.jpg')}/> 
+        source={require('../assets/images/LOGO.png')}/> 
       </View>
-
+      <Button onPress={()=>Alert.alert('This is a glicht')}>
+  
+      </Button>
+    
       <View style={styles.cuadrado}>
-        <Pressable style={styles.boton}
-        onPress={() => navigation.navigate('Lineas')}> 
-        <View style={{backgroundColor: "#ccc9c0"}}>
-          <Text>Líneas
-             </Text>
-             <Image
-          style={styles.icono}
-          source={require('../assets/images/frente-del-autobus.png')}/>
-        </View>
-        </Pressable>
-
-    <View style={styles.separator}/>
-        <TouchableHighlight style={styles.boton}
-        onPress={() => navigation.navigate('TabTwo')}> 
-        <View style={{backgroundColor: "#ccc9c0"}}>
-          <Text>Favoritos
-            <Image
-          style={styles.icono}
-          source={require('../assets/images/favoritos.png')}/>
-             </Text>
-             
-        </View>
-        </TouchableHighlight>
-    <View style={styles.separator}/>
-        <TouchableHighlight style={styles.boton}
-        onPress={() => Alert.alert('pulsaste ubicacion y paradas cercanas')}> 
-        <View style={{backgroundColor: "#ccc9c0"}}>
-          <Text>Ubicación y Paradas Cercanas
-             </Text>
-             <Image
-          style={styles.icono}
-          source={require('../assets/images/marcador-de-posicion.png')}/>
-        </View> 
-        </TouchableHighlight>
-
+        <Button 
+        icon={require('../assets/images/frente-del-autobus.png')} 
+        onPress={()=> navigation.navigate('Lineas')}
+        color='#8f0cc7'
+        >
+          Líneas
+        </Button>
+          
+        <View style={styles.separator}/>
+        <Button 
+        icon={require('../assets/images/favoritos.png')} 
+        onPress={()=> Alert.alert('Funcion pendiente de implementación')}
+        color='#ed8434'
+        >
+          Favoritos
+        </Button>
+            
+        <View style={styles.separator}/>
+        <Button 
+        icon={require('../assets/images/marcador-de-posicion.png')} 
+        onPress={()=> Alert.alert('Funcion pendiente de implementación')}
+        color='#1e9e08'
+        
+        >
+          Paradas Cercanas
+        </Button>
+        
        
       </View>
       
@@ -64,7 +57,7 @@ const styles = StyleSheet.create({
     width: '100%',
     alignItems: 'center',
     justifyContent: 'center',
-    backgroundColor: "blue",
+    backgroundColor: "#86a3d1",
   },
   container: {
     flex: 1,
@@ -76,8 +69,7 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
   },
   boton:{
-    width: '80%',
-    height:'10%',
+    width: '100%',
     justifyContent: 'center',
     alignItems: 'center',
     backgroundColor: "#ccc9c0"
@@ -85,11 +77,11 @@ const styles = StyleSheet.create({
   separator: {
     marginVertical: 10,
     height: 1,
-    width: '80%',
+    width: '100%',
   },
   logo: {
-    width: '60%',
-    height: '60%',
+    height: '100%',
+    resizeMode: 'contain'
   },
   icono: {
     width: 10,
