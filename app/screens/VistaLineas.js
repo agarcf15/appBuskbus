@@ -31,9 +31,9 @@ const VistaLineas = ({navigation}) => {
  
   return (
     <View style={styles.cuadrado}>
-      {isLoading ? <ActivityIndicator/> : (
+      {isLoading ? <ActivityIndicator/> : ( //si isLoading es true no muestra nada, sino muestra la lista
         <View style={{flexDirection: 'row'}}>
-        <FlatList
+        <FlatList //con la flatlist podemos recorrer el vector de datos completo, y mostrar los datos
           data={data}
           keyExtractor={({ Codigo }, index) => Codigo}
           renderItem={({ item }) => (

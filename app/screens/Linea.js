@@ -101,7 +101,7 @@ const Linea = ({route, navigation}) => {
                       </Button>
                     </View>
                   </View>
-                  {Mapa ?
+                  {Mapa ? //si el mapa es true se muestra el mapa
                   <View>
                     <MapView
                       provider= "google"

@@ -15,7 +15,7 @@ const Stack = createStackNavigator();
 export default function App() {
   return (
     <NavigationContainer>
-      <Stack.Navigator>
+      <Stack.Navigator>{/*para añadir más vistas, habrña que añadirlas aqui primero*/}
 
         <Stack.Screen name="Portada" component={Portada} 
           options={opciones}/>
