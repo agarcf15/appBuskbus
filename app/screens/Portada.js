@@ -7,20 +7,20 @@ import { Button } from 'react-native-paper'
 function Portada({navigation}) {
   return (
     <View style={styles.container}>
-      <View style={styles.cuadrado}>    {/*dentro de este view esta el logo de la app*/}
+      <View style={styles.cuadrado}>    
         <Image
         style={styles.logo}
         source={require('../assets/images/LOGO.png')}/> 
       </View>
 
-      <Button onPress={()=>Alert.alert('This is a glicht')}/> {/*este es un boton invisible, que actua de separador y que es dificil ver*/}
+      <Button onPress={()=>Alert.alert('This is a glicht')}/> 
       
-      <View style={styles.cuadrado}> {/*dentro de este view estan los botones de acceso*/}
+      <View style={styles.cuadrado}> 
         <Button  
         icon={require('../assets/images/frente-del-autobus.png')} 
         onPress={()=> navigation.navigate('Lineas')}
         color='#8f0cc7'
-        > {/*este boton da acceso a la lista de lineas*/}
+        > 
           Líneas
         </Button>
           
@@ -29,7 +29,7 @@ function Portada({navigation}) {
         icon={require('../assets/images/favoritos.png')} 
         onPress={()=> Alert.alert('Funcion pendiente de implementación')}
         color='#ed8434'
-        > {/*este boton dara acceso a la lista de favoritos*/}
+        > 
           Favoritos
         </Button>
             
@@ -38,7 +38,7 @@ function Portada({navigation}) {
         icon={require('../assets/images/marcador-de-posicion.png')} 
         onPress={()=> Alert.alert('Funcion pendiente de implementación')}
         color='#1e9e08'
-        > {/*este boton da acceso al mapa con las paradas cercanas*/}
+        > 
           Paradas Cercanas
         </Button>
         
