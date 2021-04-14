@@ -35,6 +35,7 @@ const Linea = ({route, navigation}) => {
               console.log("Servicio acabado");
               setServicio(true)
             }
+            console.log(data)
             setData(json.Datos);
             console.log(json.Datos.length);
             

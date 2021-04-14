@@ -30,9 +30,7 @@ const Linea = ({route, navigation}) => {
         .then ((response) => response.json())
         .then((json) => {
           if (json.Estado == "OK"){ //si la comunicación es buena devuelvo todo
-            console.log(json);
             setData(json.Datos);
-            console.log(data);
           }else{//si no es buena devuelvo solo el mensaje
             console.error(json.Mensaje);
           }
@@ -48,7 +46,7 @@ const Linea = ({route, navigation}) => {
             <View style={{flexDirection: 'column'}}>
               <MapView
                 provider= "google"
-                style = {{height : '30%'}}
+                style = {{height : '40%'}}
                 initialRegion={{
                   latitude: 36.1201500,
                   longitude: -5.4514900,
@@ -70,10 +68,11 @@ const Linea = ({route, navigation}) => {
                 style={styles.title, {backgroundColor: '#86a3d1'}}
                 
               />
-              <View style={{}}>
+              <View style={{height : '52%'}}>
               <FlatList
-              data={data.Correspondencias}
-              keyExtractor={({ HoraPaso }, index) => HoraPaso.toString()}
+
+              data={data.Correspondencias.sort((a, b) => a.HoraPaso.localeCompare(b.HoraPaso))}
+              keyExtractor={({ HoraPaso }, index) => HoraPaso}
               renderItem={({ item }) => (
                 
                 <List.Item

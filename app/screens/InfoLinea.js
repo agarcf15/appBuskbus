@@ -2,6 +2,7 @@ import * as React from 'react';
 import { useEffect, useState } from 'react';
 
 import { StyleSheet, FlatList, ActivityIndicator } from 'react-native';
+import { colors } from 'react-native-elements';
 import { List } from 'react-native-paper';
 
 import { View, } from '../../components/Themed';
@@ -14,7 +15,7 @@ const InfoLinea = ({route, navigation}) => {
   return (
     <View style={styles.cuadrado}>
       {isLoading ? <ActivityIndicator/> : ( //si isLoading es true no muestra nada, sino muestra la lista
-        <View style={{flexDirection: 'row'}}>
+        <View style={{flexDirection: 'row', }}>
         <FlatList //con la flatlist podemos recorrer el vector de datos completo, y mostrar los datos
           data={data}
           keyExtractor={({ Trayecto }, index) => Trayecto}
@@ -53,8 +54,6 @@ const styles = StyleSheet.create({
   cuadrado: {
     flex: 1,
     width: '100%',
-    alignItems: 'center',
-    justifyContent: 'center',
     backgroundColor: "#86a3d1",
   },
   container: {

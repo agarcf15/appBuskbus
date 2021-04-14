@@ -8,6 +8,7 @@ import VistaLineas from './app/screens/VistaLineas'
 import Linea from './app/screens/Linea'
 import Parada from './app/screens/Parada'
 import InfoLinea from './app/screens/InfoLinea'
+import ListaParadas from './app/screens/ListaParadas'
 const Stack = createStackNavigator();
 
 
@@ -24,6 +25,7 @@ export default function App() {
         <Stack.Screen name="Linea" component={Linea} />
         <Stack.Screen name="Parada" component={Parada} />
         <Stack.Screen name="InfoLinea" component={InfoLinea} />
+        <Stack.Screen name="ListaParadas" component={ListaParadas} />
 
 
       </Stack.Navigator>

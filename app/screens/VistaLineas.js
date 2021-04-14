@@ -73,8 +73,6 @@ const styles = StyleSheet.create({
   cuadrado: {
     flex: 1,
     width: '100%',
-    alignItems: 'center',
-    justifyContent: 'center',
     backgroundColor: "#86a3d1",
   },
   container: {
