@@ -79,6 +79,8 @@ const Linea = ({route, navigation}) => {
                       coordinate={{ latitude: parseFloat(item.Latitud), longitude: parseFloat(item.Longitud) }}
                       title={item.NombreParada}
                       description={item.HoraPaso}
+                      onPress={()=>navigation.navigate("Parada", {item})}
+
                     >
                     </Marker >
       

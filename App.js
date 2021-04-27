@@ -9,6 +9,10 @@ import Linea from './app/screens/Linea'
 import Parada from './app/screens/Parada'
 import InfoLinea from './app/screens/InfoLinea'
 import ListaParadas from './app/screens/ListaParadas'
+import BuscarLista from './app/screens/BuscarLista';
+import BuscarMapa from './app/screens/BuscarMapa';
+import Buscar from './app/screens/Buscar';
+
 const Stack = createStackNavigator();
 
 
@@ -26,6 +30,9 @@ export default function App() {
         <Stack.Screen name="Parada" component={Parada} />
         <Stack.Screen name="InfoLinea" component={InfoLinea} />
         <Stack.Screen name="ListaParadas" component={ListaParadas} />
+        <Stack.Screen name="BuscarMapa" component={BuscarMapa} />
+        <Stack.Screen name="BuscarLista" component={BuscarLista} />
+        <Stack.Screen name="Buscar" component={Buscar} />
 
 
       </Stack.Navigator>

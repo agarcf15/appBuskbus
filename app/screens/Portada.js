@@ -36,10 +36,10 @@ function Portada({navigation}) {
         <View style={styles.separator}/>
         <Button 
         icon={require('../assets/images/marcador-de-posicion.png')} 
-        onPress={()=> Alert.alert('Funcion pendiente de implementación')}
+        onPress={()=> navigation.navigate('Buscar')}
         color='#1e9e08'
         > 
-          Paradas Cercanas
+          Buscar
         </Button>
         
        
