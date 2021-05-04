@@ -14,7 +14,7 @@ const ListaParadas = ({route, navigation}) => {
   return (
     <View style={styles.cuadrado}>
       {isLoading ? <ActivityIndicator/> : ( //si isLoading es true no muestra nada, sino muestra la lista
-         <View style={{flexDirection: 'row'}}   >
+         <View style={{flexDirection: 'row'}}>
          <FlatList
          data={data}
          keyExtractor={({ Orden }, index) => Orden.toString()}

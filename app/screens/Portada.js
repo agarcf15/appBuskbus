@@ -1,10 +1,22 @@
 import * as React from 'react';
-import { Alert, StyleSheet, Image, } from 'react-native';
+import { useEffect, useState } from 'react';
+
+import { StyleSheet, TextInput, Image, Alert} from 'react-native';
+
+import SwitchSelector from 'react-native-switch-selector'
 
 import { View } from '../../components/Themed';
 import { Button } from 'react-native-paper'
 
-function Portada({navigation}) {
+const Portada = ({navigation}) => {
+
+  const [ListaOMapa, setListaOMapa] = useState("Mapa") //si es TRUE se mostraran los datos 
+    // en lista. Si es FALSE se mostrará el mapa
+  const [isLoading, setLoading] = useState(false);
+  
+  const [noDatos, setNoData] = useState(false); //si es TRUE hay datos, si es FALSE no los hay
+
+  const [text, onChangetext] = React.useState(" ");
   return (
     <View style={styles.container}>
       <View style={styles.cuadrado}>    
@@ -34,13 +46,36 @@ function Portada({navigation}) {
         </Button>
             
         <View style={styles.separator}/>
-        <Button 
-        icon={require('../assets/images/marcador-de-posicion.png')} 
-        onPress={()=> navigation.navigate('Buscar')}
-        color='#1e9e08'
-        > 
-          Buscar
-        </Button>
+            <TextInput
+                style={styles.input}
+                onChangeText={onChangetext}
+                value={text}
+                placeholder="buscar..."
+                
+            />
+            <SwitchSelector
+                initial={0}
+                onPress={value => setListaOMapa(value)}
+                textColor={'#7a44cf'} //'#7a44cf'
+                selectedColor={'#fff'}
+                buttonColor={'#7a44cf'}
+                borderColor={'#7a44cf'}
+                hasPadding
+                options={[
+                    { label: "Mapa", value: "Mapa"}, //images.feminino = require('./path_to/assets/img/feminino.png')
+                    { label: "Lista", value: "Lista"} //images.masculino = require('./path_to/assets/img/masculino.png')
+                ]}
+            />
+            <Button onPress={()=> {
+              if(text==null){
+                Alert.alert("Error: Introduce el término a buscar")
+              }else{
+                navigation.navigate("Buscar", {text, ListaOMapa})}
+
+              }
+              }>
+                Buscar
+            </Button>
         
        
       </View>

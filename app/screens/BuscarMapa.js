@@ -7,9 +7,36 @@ import { List } from 'react-native-paper';
 import { View, } from '../../components/Themed';
 
 const BuscarMapa = ({route, navigation}) => {
-    const data = route.params.item.Paradas
+    const data = route.params.text
   const [isLoading, setLoading] = useState(false);
-  
+  const [noDatos, setNoData] = useState(false); //si es FALSE el servicio esta operativo, si es TRUE es que ya ha terminado
+
+  useEffect(() => {
+    console.log(data);
+    fetch('http://algeciras.timebus.es/api/buskbus/v2/index.php/buscarparada/0008/buskbus/'+data.toString()+'/0', {
+          method: 'POST',
+        })
+        .then ((response) => response.json())
+        .then((json) => {
+          if (json.Estado == "OK"){ //si la comunicación es buena devuelvo todo
+            if(json.Datos.length=="0"){
+              console.log("No hay datos");
+              setNoData(true)
+            }
+            setData(json.Datos);
+            console.log(json.Datos.length);
+            if (json.Datos.length=="1"){ //si es 1, la linea tiene un unico trayecto 
+                setIdaVuelta(true)
+            }
+          }else{//si no es buena devuelvo solo el mensaje
+            console.error(json.Mensaje);
+          }
+        })
+        .catch((error) => {
+          console.error(error);
+        })
+        .finally(() => setLoading(false));
+    }, []);
  
   return (
     <View style={styles.cuadrado}>
