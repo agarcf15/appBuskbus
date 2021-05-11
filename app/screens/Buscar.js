@@ -1,14 +1,14 @@
 import * as React from 'react';
 import { useEffect, useState } from 'react';
 
-import { StyleSheet, TextInput, ActivityIndicator, Alert, FlatList} from 'react-native';
+import { StyleSheet, TextInput, ActivityIndicator, Alert, FlatList, Switch} from 'react-native';
 import { List, Button } from 'react-native-paper';
 
-import RNPickerSelect from 'react-native-picker-select';
+import SwitchSelector from 'react-native-switch-selector'
 
 import { View, } from '../../components/Themed';
 
-import MapView, { Polyline } from 'react-native-maps';
+import MapView from 'react-native-maps';
 import { Marker } from 'react-native-maps';
 
 const Buscar = ({route, navigation}) => {
@@ -20,13 +20,17 @@ const Buscar = ({route, navigation}) => {
     
     const [noDatos, setNoData] = useState(false); //si es FALSE hay datos, si es TRUE no los hay
     const [data, setData] = useState([]);//datos de la api
+    
+    const [Mapa, setMapa] = useState(false);//Si horario es TRUE, mapa es FALSE
+    
 
-    const [text, onChangetext] = React.useState(" ");
-    if(route.params.text=!" "){
-      onChangetext(route.params.text);
-    }
+    const [text, onChangetext] = useState(route.params.text);
+    
   
     useEffect(() => {
+      if(text==""){
+
+      }else
       fetch('http://algeciras.timebus.es/api/buskbus/v2/index.php/buscarparada/0008/buskbus/'+text.toString()+'/0', {
         method: 'POST',
       })
@@ -38,7 +42,8 @@ const Buscar = ({route, navigation}) => {
             setNoData(true)
           }
           setData(json.Datos);
-          console.log(json.Datos);
+          console.log(data);
+          console.log("tenemos " + json.Datos.length+ " datos");
           
         }else{//si no es buena devuelvo solo el mensaje
           console.error(json.Mensaje);
@@ -63,13 +68,19 @@ const Buscar = ({route, navigation}) => {
                 placeholder="buscar..."
                 
               />
-              <RNPickerSelect
-                onValueChange={(value) = console.log(value)}
-                items={[
-                  { label: "Mapa", value: "Mapa"}, //images.feminino = require('./path_to/assets/img/feminino.png')
-                  { label: "Lista", value: "Lista"} //images.masculino = require('./path_to/assets/img/masculino.png')
-                  ]}
-                />
+              <SwitchSelector
+                initial={0}
+                onPress={(value) => setListaOMapa(value)}
+                textColor={'#7a44cf'} //'#7a44cf'
+                selectedColor={'#fff'}
+                buttonColor={'#7a44cf'}
+                borderColor={'#7a44cf'}
+                hasPadding
+                options={[
+                    { label: "Mapa", value: "Mapa"}, //images.feminino = require('./path_to/assets/img/feminino.png')
+                    { label: "Lista", value: "Lista"} //images.masculino = require('./path_to/assets/img/masculino.png')
+                ]}
+            />
               
               <Button onPress={()=> {
                 if(text==null){
@@ -95,18 +106,7 @@ const Buscar = ({route, navigation}) => {
                       longitude: -5.4514900,
                       latitudeDelta: 0.06,
                       longitudeDelta: 0.07,
-                    }}>
-                    {
-                      data[0].Paradas.map((item) => 
-                      <Marker
-                        key={item.Orden}
-                        coordinate={{ latitude: parseFloat(item.Latitud), longitude: parseFloat(item.Longitud) }}
-                        title={item.NombreParada}
-                        description={item.HoraPaso}
-                      >
-                      </Marker >
-                    )}                      
-                  </MapView>
+                    }}/>
                 </View>
                     //si selecciono paradas se muestra la lista
               :(
@@ -137,21 +137,31 @@ const Buscar = ({route, navigation}) => {
                     initialRegion={{
                       latitude: 36.1201500,
                       longitude: -5.4514900,
-                      latitudeDelta: 0.06,
-                      longitudeDelta: 0.07,
-                    }}/>
-                                 
+                      latitudeDelta: 0.05,
+                      longitudeDelta: 0.05,
+                    }}
+                    >
+                      
+                    {
+                      data.map((item) => 
+                      <Marker
+                        key={item.IdParada}
+                        coordinate={{ latitude: parseFloat(item.Latitud), longitude: parseFloat(item.Longitud) }}
+                        title={item.Nombre}
+                      >
+                      </Marker >
+                    )}                      
+                  </MapView>
                 </View>
                     //si selecciono paradas se muestra la lista
               :(
                 <View style={{flexDirection: 'row'}}>
                   <FlatList
-                  data={data[0]}
-                  keyExtractor={({ Orden }, index) => Orden.toString()}
+                  data={data}
+                  keyExtractor={({ IdParada }, index) => IdParada.toString()}
                   renderItem={({ item }) => (
                     <List.Item
-                      title= {item.CodigoParada, item.NombreParada}
-                      description = {item.HoraPaso}
+                      title= {item.Codigo, item.Nombre}
                       left={props => <List.Icon {...props} 
                         icon={require('../assets/images/marcador-de-posicion.png')}
                       />}

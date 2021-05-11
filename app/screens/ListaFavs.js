@@ -5,23 +5,63 @@ import { StyleSheet, FlatList, ActivityIndicator } from 'react-native';
 import { List } from 'react-native-paper';
 
 import { View, } from '../../components/Themed';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
-const BuscarLista = ({route, navigation}) => {
-    const data = route.params.item.Paradas
-  const [isLoading, setLoading] = useState(false);
-  
- 
+const ListaFavs = ({navigation}) => {
+    const [isLoading, setLoading] = useState(false);
+    const [data, setData] = useState();
+    useEffect(()=>{
+         getFavs()
+         .finally(()=> setLoading(false))
+    }, [])    
+    const clearAll = async () => {
+        try {
+          await AsyncStorage.clear()
+        } catch(e) {
+          // clear error
+        }
+      
+        console.log('Done.')
+      }
+      
+      
+    const getAllKeys = async () => {
+        let keys = []
+        try {
+          keys = await AsyncStorage.getAllKeys()
+        } catch(e) {
+          // read key error
+        }
+
+        console.log("keys "+keys)
+        return keys;
+    }
+    const getFavs = async () => {
+        let final =[]
+        let values
+        try {
+            values = await AsyncStorage.multiGet((await getAllKeys()))
+        } catch(e) {
+
+        }
+        values.forEach(value => {
+            final.push(JSON.parse(value[1]))
+        });
+        console.log(final)
+        setData(final)
+    }
+    
   return (
     <View style={styles.cuadrado}>
       {isLoading ? <ActivityIndicator/> : ( //si isLoading es true no muestra nada, sino muestra la lista
-         <View style={{flexDirection: 'row'}}   >
+         <View style={{flexDirection: 'row'}}>
          <FlatList
          data={data}
-         keyExtractor={({ Orden }, index) => Orden.toString()}
+         keyExtractor={({ Codigo }, index) => Codigo.toString()}
          renderItem={({ item }) => (
            <List.Item
-             title= {item.CodigoParada, item.NombreParada}
-             description = {item.HoraPaso}
+             title= {item.Codigo, item.Nombre}
+             //description = {item.HoraPaso}
              left={props => <List.Icon {...props} 
                icon={require('../assets/images/marcador-de-posicion.png')}
              />}
@@ -35,7 +75,7 @@ const BuscarLista = ({route, navigation}) => {
   );
 };
 
-export default BuscarLista;
+export default ListaFavs;
 
 const styles = StyleSheet.create({
   mycard:{
@@ -50,8 +90,6 @@ const styles = StyleSheet.create({
   cuadrado: {
     flex: 1,
     width: '100%',
-    alignItems: 'center',
-    justifyContent: 'center',
     backgroundColor: "#86a3d1",
   },
   container: {

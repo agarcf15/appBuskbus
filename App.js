@@ -9,8 +9,7 @@ import Linea from './app/screens/Linea'
 import Parada from './app/screens/Parada'
 import InfoLinea from './app/screens/InfoLinea'
 import ListaParadas from './app/screens/ListaParadas'
-import BuscarLista from './app/screens/BuscarLista';
-import BuscarMapa from './app/screens/BuscarMapa';
+import ListaFavs from './app/screens/ListaFavs';
 import Buscar from './app/screens/Buscar';
 
 const Stack = createStackNavigator();
@@ -26,13 +25,18 @@ export default function App() {
           options={opciones}/>
         <Stack.Screen name="Lineas" component={VistaLineas} 
           options={{...opciones, title: "Líneas"}}/>
-        <Stack.Screen name="Linea" component={Linea} />
-        <Stack.Screen name="Parada" component={Parada} />
-        <Stack.Screen name="InfoLinea" component={InfoLinea} />
-        <Stack.Screen name="ListaParadas" component={ListaParadas} />
-        <Stack.Screen name="BuscarMapa" component={BuscarMapa} />
-        <Stack.Screen name="BuscarLista" component={BuscarLista} />
-        <Stack.Screen name="Buscar" component={Buscar} />
+        <Stack.Screen name="Linea" component={Linea}
+          options={{...opciones, title: "Linea"}}/>
+        <Stack.Screen name="Parada" component={Parada} 
+          options={{...opciones, title: "Parada"}}/>
+        <Stack.Screen name="InfoLinea" component={InfoLinea} 
+          options={{...opciones, title: "Información"}}/>
+        <Stack.Screen name="ListaParadas" component={ListaParadas} 
+          options={{...opciones, title: "Listado de paradas"}}/>
+        <Stack.Screen name="ListaFavs" component={ListaFavs} 
+          options={{...opciones, title: "Favoritos"}}/>
+        <Stack.Screen name="Buscar" component={Buscar} 
+          options={{...opciones, title: "Buscar"}}/>
 
 
       </Stack.Navigator>

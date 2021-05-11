@@ -16,7 +16,7 @@ const Portada = ({navigation}) => {
   
   const [noDatos, setNoData] = useState(false); //si es TRUE hay datos, si es FALSE no los hay
 
-  const [text, onChangetext] = React.useState(" ");
+  const [text, onChangetext] = React.useState("");
   return (
     <View style={styles.container}>
       <View style={styles.cuadrado}>    
@@ -39,7 +39,7 @@ const Portada = ({navigation}) => {
         <View style={styles.separator}/>
         <Button 
         icon={require('../assets/images/favoritos.png')} 
-        onPress={()=> Alert.alert('Funcion pendiente de implementación')}
+        onPress={()=> navigation.navigate('ListaFavs')}
         color='#ed8434'
         > 
           Favoritos
@@ -50,12 +50,12 @@ const Portada = ({navigation}) => {
                 style={styles.input}
                 onChangeText={onChangetext}
                 value={text}
-                placeholder="buscar..."
+                placeholder="Buscar..."
                 
             />
             <SwitchSelector
                 initial={0}
-                onPress={value => setListaOMapa(value)}
+                onPress={(value) => setListaOMapa(value)}
                 textColor={'#7a44cf'} //'#7a44cf'
                 selectedColor={'#fff'}
                 buttonColor={'#7a44cf'}
@@ -67,7 +67,7 @@ const Portada = ({navigation}) => {
                 ]}
             />
             <Button onPress={()=> {
-              if(text==null){
+              if(text==""){
                 Alert.alert("Error: Introduce el término a buscar")
               }else{
                 navigation.navigate("Buscar", {text, ListaOMapa})}
