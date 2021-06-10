@@ -27,46 +27,51 @@ const Portada = ({navigation}) => {
 
       <Button onPress={()=>Alert.alert('This is a glicht')}/> 
       
-      <View style={styles.cuadrado}> 
+      <View style={styles.cuadrado1}> 
         <Button  
-        icon={require('../assets/images/frente-del-autobus.png')} 
-        onPress={()=> navigation.navigate('Lineas')}
-        color='#8f0cc7'
+          labelStyle={{ fontSize: 22 }}
+          icon={require('../assets/images/frente-del-autobus.png')} 
+          onPress={()=> navigation.navigate('Lineas')}
+          color='#2b92ff'
         > 
           Líneas
         </Button>
           
-        <View style={styles.separator}/>
         <Button 
-        icon={require('../assets/images/favoritos.png')} 
-        onPress={()=> navigation.navigate('ListaFavs')}
-        color='#ed8434'
+          labelStyle={{ fontSize: 22 }}
+          icon={require('../assets/images/favoritos.png')} 
+          onPress={()=> navigation.navigate('ListaFavs')}
+          color='#ed8434'
         > 
           Favoritos
         </Button>
             
         <View style={styles.separator}/>
             <TextInput
-                style={styles.input}
+                style={styles.input, { width: '90%',  height: 40, borderColor: 'gray', borderWidth: 1}}
                 onChangeText={onChangetext}
                 value={text}
-                placeholder="Buscar..."
-                
+                placeholder="  Buscar..."
             />
+
+            <View style={styles.separator}/>
+
             <SwitchSelector
                 initial={0}
                 onPress={(value) => setListaOMapa(value)}
-                textColor={'#7a44cf'} //'#7a44cf'
+                textColor={'#2b92ff'} //'#7a44cf'
                 selectedColor={'#fff'}
-                buttonColor={'#7a44cf'}
-                borderColor={'#7a44cf'}
+                buttonColor={'#2b92ff'}
+                borderColor={'#2b92ff'}
                 hasPadding
                 options={[
                     { label: "Mapa", value: "Mapa"}, //images.feminino = require('./path_to/assets/img/feminino.png')
                     { label: "Lista", value: "Lista"} //images.masculino = require('./path_to/assets/img/masculino.png')
                 ]}
             />
-            <Button onPress={()=> {
+            <Button 
+            labelStyle={{ fontSize: 22 }}
+            color= '#2b92ff' onPress={()=> {
               if(text==""){
                 Alert.alert("Error: Introduce el término a buscar")
               }else{
@@ -92,6 +97,13 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     backgroundColor: "#86a3d1",
   },
+  cuadrado1: {
+    flex: 0.5,
+    width: '100%',
+    alignItems: 'center',
+    justifyContent: 'center',
+    backgroundColor: "#ffffff",
+  },
   container: {
     flex: 1,
     alignItems: 'center',
@@ -105,10 +117,9 @@ const styles = StyleSheet.create({
     width: '100%',
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: "#ccc9c0"
   },
   separator: {
-    marginVertical: 10,
+    marginVertical: 5,
     height: 1,
     width: '100%',
   },

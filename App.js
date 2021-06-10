@@ -47,7 +47,7 @@ export default function App() {
 
 const opciones = {
   title: "Buskbus",
-    headerTintColor: "#c44037",
+    headerTintColor: "#ed8434",
     headerStyle:{
       backgroundColor: "white"
     }

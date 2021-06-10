@@ -87,19 +87,22 @@ const Linea = ({route, navigation}) => {
                     )}   
                   </MapView>
               </View>
+              <View style={{marginVertical: 10, height: 1, width: '80%',backgroundColor: ColorFondo}}/>
               <View style={{backgroundColor: ColorFondo, alignItems: 'center'}} >
                 <Image 
                   style={{ width: 60,height: 60,}}
                   source={require('../assets/images/frente-del-autobus.png')}
                 />
-                <Text> {Nombre} </Text>
-                <View style={{backgroundColor: ColorFondo, alignItems: 'center', width: 100,height: 100}} >
-                  <Pressable onPress={()=>navigation.navigate("InfoLinea", {data})}>
-                    <Image 
-                    style={{ width: 73,height: 80,marginTop: 5}}
-                    source={require('../assets/images/Info.png')}
-                  />
-                  </Pressable>
+                <Text style ={{ fontSize: 20 }}> {Nombre} </Text>
+                <View style={{backgroundColor: ColorFondo, alignItems: 'center',height: 100}} >
+                  <Button  
+                    labelStyle={{ fontSize: 36 }}
+                    icon={require('../assets/images/Info.png')} 
+                    onPress={()=> navigation.navigate("InfoLinea", {data})}
+                    color='#000000'
+                  > 
+                    Info
+                  </Button>
                 </View>
               </View>
                     
@@ -155,7 +158,7 @@ const styles = StyleSheet.create({
     backgroundColor: "#ccc9c0"
   },
   separator: {
-    marginVertical: 10,
+    marginVertical: 8,
     height: 1,
     width: '80%',
   },

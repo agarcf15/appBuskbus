@@ -71,36 +71,28 @@ const Buscar = ({route, navigation}) => {
               <SwitchSelector
                 initial={0}
                 onPress={(value) => setListaOMapa(value)}
-                textColor={'#7a44cf'} //'#7a44cf'
+                textColor={'#2b92ff'} //'#7a44cf'
                 selectedColor={'#fff'}
-                buttonColor={'#7a44cf'}
-                borderColor={'#7a44cf'}
+                buttonColor={'#2b92ff'}
+                borderColor={'#2b92ff'}
                 hasPadding
                 options={[
                     { label: "Mapa", value: "Mapa"}, //images.feminino = require('./path_to/assets/img/feminino.png')
                     { label: "Lista", value: "Lista"} //images.masculino = require('./path_to/assets/img/masculino.png')
                 ]}
             />
-              
-              <Button onPress={()=> {
-                if(text==null){
-                  Alert.alert("Error: Introduce el término a buscar")
-                }else{
-                  navigation.navigate("Buscar", {text, ListaOMapa})}
-
-                }
-                }>
-                  Buscar
-              </Button>
+            <View style={styles.separator}/>
             </View>
             <View>
           {noDatos ?
             <View>
               {ListaOMapa=="Mapa" ? //si el mapa es true se muestra el mapa
-                <View>
+                <View
+                style = {{height : '80%'}}
+                >
                   <MapView
                     provider= "google"
-                    style = {{height : '90%'}}
+                    style = {{height : '100%'}}
                     initialRegion={{
                       latitude: 36.1201500,
                       longitude: -5.4514900,
@@ -130,10 +122,12 @@ const Buscar = ({route, navigation}) => {
           :(
             <View>
               {ListaOMapa=="Mapa" ? //si el mapa es true se muestra el mapa
-                <View>
+                <View
+                style = {{height : '78%'}}
+                >
                   <MapView
                     provider= "google"
-                    style = {{height : '90%'}}
+                    style = {{height : '100%'}}
                     initialRegion={{
                       latitude: 36.1201500,
                       longitude: -5.4514900,
@@ -148,6 +142,7 @@ const Buscar = ({route, navigation}) => {
                         key={item.IdParada}
                         coordinate={{ latitude: parseFloat(item.Latitud), longitude: parseFloat(item.Longitud) }}
                         title={item.Nombre}
+                        onPress={()=>navigation.navigate("Parada", {item})}
                       >
                       </Marker >
                     )}                      
@@ -155,7 +150,7 @@ const Buscar = ({route, navigation}) => {
                 </View>
                     //si selecciono paradas se muestra la lista
               :(
-                <View style={{flexDirection: 'row'}}>
+                <View style={{flexDirection: 'row', height : '78%'}}>
                   <FlatList
                   data={data}
                   keyExtractor={({ IdParada }, index) => IdParada.toString()}
@@ -170,9 +165,21 @@ const Buscar = ({route, navigation}) => {
                   )}/>
                 </View>
               )}
+              <View style={styles.separator}/>
+              <Button 
+            labelStyle={{ fontSize: 22 }}
+            color= '#2b92ff' onPress={()=> {
+              if(text==""){
+                Alert.alert("Error: Introduce el término a buscar")
+              }else{
+                console.log(text)
+                navigation.navigate("Buscar", {text, ListaOMapa})}
+              }
+              }>
+                Buscar
+            </Button>
             </View>
           )}
-              
         </View>
       </View> 
       )}
@@ -232,4 +239,8 @@ const styles = StyleSheet.create({
     margin: 12,
     borderWidth: 1,
   },
+  buscar:{
+    position: 'absolute',
+    bottom:0
+  }
 });

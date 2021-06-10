@@ -90,7 +90,7 @@ const styles = StyleSheet.create({
   cuadrado: {
     flex: 1,
     width: '100%',
-    backgroundColor: "#86a3d1",
+    backgroundColor: "#ffffff",
   },
   container: {
     flex: 1,
