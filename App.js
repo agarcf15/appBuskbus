@@ -19,7 +19,7 @@ const Stack = createStackNavigator();
 export default function App() {
   return (
     <NavigationContainer>
-      <Stack.Navigator>{/*para añadir más vistas, habrña que añadirlas aqui primero*/}
+      <Stack.Navigator>{/*para añadir más vistas, habra que añadirlas aqui primero*/}
 
         <Stack.Screen name="Portada" component={Portada} 
           options={opciones}/>
@@ -43,7 +43,6 @@ export default function App() {
     </NavigationContainer>
   );
 }
-//options={{headerTitle: props => <LogoTitle {...props} /> }
 
 const opciones = {
   title: "Buskbus",
@@ -52,33 +51,5 @@ const opciones = {
       backgroundColor: "white"
     }
 }
-// URL http://algeciras.timebus.es/api/buskbus/v2/index.php/{{comando}}/0008/buskbus/{{parámetros}}
-function LogoTitle() {
-  return (
-    <View>
-      <View style={{flex: 7, justifyContent: 'center'}}>
-        <Text>
-          Líneas
-        </Text>
-      </View>
-      <View style={{flex: 3, justifyContent: 'center'}}>
-        <Image
-          style={{ width: 50, height: 50 }}
-          source={require('./app/assets/images/frente-del-autobus.png')}
-        />
-      </View>
-      
-    </View>
 
-    
-  );
-}
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
 
