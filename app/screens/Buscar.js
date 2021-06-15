@@ -62,7 +62,7 @@ const Buscar = ({route, navigation}) => {
           }}>
             <View>
               <TextInput
-                style={styles.input}
+                style={styles.input, {paddingLeft:5}}
                 onChangeText={onChangetext}
                 value={text}
                 placeholder="buscar..."

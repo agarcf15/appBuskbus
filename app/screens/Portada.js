@@ -48,7 +48,7 @@ const Portada = ({navigation}) => {
             
         <View style={styles.separator}/>
             <TextInput
-                style={styles.input, { width: '90%',  height: 40, borderColor: 'gray', borderWidth: 1}}
+                style={styles.input, { width: '90%',  height: 40, borderColor: 'gray', borderWidth: 1, paddingLeft:5}}
                 onChangeText={onChangetext}
                 value={text}
                 placeholder="  Buscar..."
